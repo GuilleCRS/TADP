@@ -1,0 +1,20 @@
+package U2.Semaforos;
+
+public class Semaforo {
+    private int Recursos;
+    public Semaforo(int Recursos){
+        this.Recursos=Recursos;
+    }
+    public synchronized void Espera(){
+        while(Recursos <= 0){
+            try{
+                wait();
+            }catch (InterruptedException e){}
+        }
+        Recursos--;
+    }
+    public synchronized void Libera(){
+        Recursos++;
+        notifyAll();
+    }
+}
