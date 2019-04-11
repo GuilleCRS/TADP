@@ -22,7 +22,7 @@ import javax.swing.JPanel;
         private static final long serialVersionUID = 1L;
         private int figura, x1, y1, x2, y2, ancho, alto;
         private Color color;
-        private boolean relleno;
+        private boolean relleno=false;
         private ArrayList<Figuras> contenido;
 
         public JPLienzo()
@@ -196,9 +196,8 @@ import javax.swing.JPanel;
                 } else {
                     switch (F.getFig()) {
                         case 0: //Linea
-                            super.paintComponent(g);
                             Graphics2D g2 = (Graphics2D) g;
-                            g2.setStroke(new BasicStroke(10.0f));
+                            g2.setStroke(new BasicStroke(10,1,2));
                             g2.drawLine(F.getX1(), F.getY1(), F.getX2(), F.getY2());
                             break;
                         case 1: //Ovalo
@@ -289,10 +288,7 @@ import javax.swing.JPanel;
         {
             x1=e.getX();
             y1=e.getY();
-            if(e.getButton()==MouseEvent.BUTTON1)
-                relleno=false;
-            if(e.getButton()==MouseEvent.BUTTON3)
-                relleno=true;
+
 
 
         }

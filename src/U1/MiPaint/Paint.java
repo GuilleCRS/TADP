@@ -45,12 +45,17 @@ public class Paint extends JFrame implements ActionListener {
     private JLabel jlblInfo;
     private JLabel jlblHora;
     private JPanel contorno,relleno;
+    private boolean bandrelleno;
+    private JMenuItem rellenito;
+    private JRadioButton radio;
+
     public Paint() throws HeadlessException{
         super();
         setSize(new Dimension(800,600));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Mi Paint");
+        jpCentro = new JPLienzo();
 
         InitComponents();
         setVisible(true);
@@ -281,6 +286,17 @@ public class Paint extends JFrame implements ActionListener {
             archivo.add(jmisalir);
             jmisalir.addActionListener(this);
 
+
+             rellenito=new JMenuItem("Rellenito: "+false);
+             rellenito.setMnemonic('x');
+             archivo.add(rellenito);
+             rellenito.addActionListener(this);
+
+             radio = new JRadioButton("Relleno");
+             archivo.add(radio);
+             radio.addActionListener(this);
+
+
             jmbP.add(archivo);
 
         }
@@ -304,6 +320,12 @@ public class Paint extends JFrame implements ActionListener {
             editar.add(pegar);
             pegar.addActionListener(this);
 
+            JMenuItem rellenito=new JMenuItem("Rellenito");
+            rellenito.setMnemonic('a');
+            editar.add(rellenito);
+            editar.addActionListener(this);
+
+
             jmbP.add(editar);
 
         }
@@ -326,13 +348,9 @@ public class Paint extends JFrame implements ActionListener {
 
 
         }
-
         setJMenuBar(jmbP);
-
-
-
-
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -388,6 +406,10 @@ public class Paint extends JFrame implements ActionListener {
                             "Aviso del sistema", JOptionPane.OK_OPTION);
                 }
             }
+        }
+        if(e.getSource()==radio){
+            jpCentro.setRelleno(!jpCentro.isRelleno());
+
         }
         if(e.getSource()==a){
             ActualizaStatus("Selecciono Color");
